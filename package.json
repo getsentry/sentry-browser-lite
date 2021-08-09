@@ -11,5 +11,6 @@
   "scripts": {
     "re:build": "rescript",
     "re:start": "rescript build -w"
-  }
+  },
+  "type": "module"
 }
