@@ -1,0 +1,15 @@
+{
+  "name": "sentry-browser-lite",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "git@github.com:getsentry/sentry-browser-lite.git",
+  "author": "Sentry",
+  "license": "MIT",
+  "devDependencies": {
+    "rescript": "^9.1.4"
+  },
+  "scripts": {
+    "re:build": "rescript",
+    "re:start": "rescript build -w"
+  }
+}
