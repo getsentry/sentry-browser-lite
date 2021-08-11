@@ -3,7 +3,7 @@ import { SDK_INFO } from './constants';
 import { uuid4 } from './utils';
 
 const defaultOptions: Partial<Options> = {
-  transport: window.fetch.bind(window),
+  transport: (r: Request) => fetch(r),
 };
 
 interface ErrorEventEnvelope {
@@ -40,6 +40,8 @@ export function captureEvent(input: ErrorEventInput, opts?: Options) {
     return;
   }
   opts = { ...defaultOptions, ...opts };
+
+  // TODO: check opts.rateLimiter
 
   let event: ErrorEvent = {
     event_id: uuid4(),
@@ -80,5 +82,10 @@ export function captureEvent(input: ErrorEventInput, opts?: Options) {
     req = opts?.hooks.onRequest(req);
   }
 
-  opts.transport?.(req).catch(reason => console.log(reason));
+  opts
+    .transport?.(req)
+    .then(response => {
+      // TODO: update opts.rateLimiter
+    })
+    .catch(reason => console.log(reason));
 }
