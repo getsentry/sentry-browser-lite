@@ -28,14 +28,14 @@ function stringifyEnvelope({
   )}\n${JSON.stringify(body)}`;
 }
 
-export function captureException(e: any, opts: Options) {
+export function captureException(e: any, opts?: Options) {
   const input: ErrorEventInput = {
     message: String(e),
   };
   return captureEvent(input, opts);
 }
 
-export function captureEvent(input: ErrorEventInput, opts?: Options) {
+function captureEvent(input: ErrorEventInput, opts?: Options) {
   if (!opts?.endpoint) {
     return;
   }
