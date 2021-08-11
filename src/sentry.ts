@@ -1,19 +1,42 @@
-export interface ErrorEvent {
-  id: string,
-  timestamp: Date,
-  message?: string,
+import { ErrorEvent, SdkInfo } from './types';
+
+interface Envelope {
+  headers: {
+    event_id: string,
+    sent_at: string,
+    sdk: SdkInfo,
+  },
+  itemHeaders: {
+    type: string,
+  },
+  body: ErrorEvent,
 }
 
-export interface Session {
+function stringifyEnvelope({ headers, itemHeaders, body }: Envelope): string {
+  return `${JSON.stringify(headers)}\n${JSON.stringify(itemHeaders)}\n${body}`
 }
 
-const e: ErrorEvent = {
-  id: "ok",
-  timestamp: new Date(),
+export function captureEvent(e: ErrorEvent, { endpoint }: { endpoint: string }) {
+  const env: Envelope = {
+    headers: {
+      event_id: e.event_id,
+      sent_at: new Date().toISOString(),
+      sdk: e.sdk,
+    },
+    itemHeaders: {
+      type: "event",
+    },
+    body: e,
+  }
+
+  void fetch(endpoint, {
+    method: 'POST',
+    mode: 'no-cors',
+    credentials: 'omit',
+    cache: 'no-cache',
+    referrerPolicy: 'no-referrer',
+    body: stringifyEnvelope(env),
+  });
 }
 
-const endpoint = "https://sentry.io/api/1/envelope?k=v"
-
-function captureEvent(e: ErrorEvent, {endpoint: string}) {}
-
-function captureSession(s: Session, {endpoint: string}) {}
+// function captureSession(s: Session, { endpoint }: { endpoint: string }) {}
