@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Test Sandbox</title>
+	<meta charset="UTF-8" />
+</head>
+
+<body>
+  <script type="module" src="dist/sentry-browser-lite.esm.js"></script>
+  <script type="module">
+    import * as Sentry from "./dist/sentry-browser-lite.esm.js";
+
+    const endpoint = 'https://o447951.ingest.sentry.io/api/5429213/envelope/?sentry_key=d16ae2d36f9249849c7964e9a3a8a608';
+
+    Sentry.captureException("hello", {endpoint});
+    console.log("done");
+  </script>
+</body>
+
+</html>
