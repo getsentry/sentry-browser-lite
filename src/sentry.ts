@@ -73,9 +73,8 @@ export function captureEvent(input: ErrorEventInput, opts?: Options) {
   let req = new Request(opts.endpoint, {
     method: 'POST',
     body: stringifyEnvelope(env),
-    // mode: 'no-cors',
-    // credentials: 'omit',
-    // keepalive: true,
+    credentials: 'omit',
+    keepalive: true,
   });
 
   if (opts?.hooks?.onRequest) {
@@ -84,7 +83,7 @@ export function captureEvent(input: ErrorEventInput, opts?: Options) {
 
   opts
     .transport?.(req)
-    .then(response => {
+    .then(_response => {
       // TODO: update opts.rateLimiter
     })
     .catch(reason => console.log(reason));
