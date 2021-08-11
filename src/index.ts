@@ -1,2 +1,1 @@
-
-export { captureException } from "./sentry";
+export { captureException } from './sentry';

@@ -1,9 +1,10 @@
 import { ErrorEvent, SdkInfo, Options, ErrorEventInput } from './types';
 import { SDK_INFO } from './constants';
+import { uuid4 } from './utils';
 
 const defaultOptions: Partial<Options> = {
-  transport: fetch
-}
+  transport: window.fetch.bind(window),
+};
 
 interface ErrorEventEnvelope {
   headers: {
@@ -17,35 +18,38 @@ interface ErrorEventEnvelope {
   body: ErrorEvent;
 }
 
-function stringifyEnvelope({ headers, itemHeaders, body }: ErrorEventEnvelope): string {
-  return `${JSON.stringify(headers)}\n${JSON.stringify(itemHeaders)}\n${JSON.stringify(body)}`
+function stringifyEnvelope({
+  headers,
+  itemHeaders,
+  body,
+}: ErrorEventEnvelope): string {
+  return `${JSON.stringify(headers)}\n${JSON.stringify(
+    itemHeaders
+  )}\n${JSON.stringify(body)}`;
 }
 
 export function captureException(e: any, opts: Options) {
   const input: ErrorEventInput = {
     message: String(e),
-  }
-  return captureEvent(input, opts)
+  };
+  return captureEvent(input, opts);
 }
 
 export function captureEvent(input: ErrorEventInput, opts?: Options) {
   if (!opts?.endpoint) {
-    return
+    return;
   }
-
-  opts = {...defaultOptions, ...opts};
+  opts = { ...defaultOptions, ...opts };
 
   let event: ErrorEvent = {
-    event_id: "1234", // TODO: generate random ID
+    event_id: uuid4(),
     timestamp: new Date(),
     sdk: SDK_INFO,
-    ...(input.message && {message: input.message}),
-  }
+    ...(input.message && { message: input.message }),
+  };
 
-  if (opts?.sampler) {
-    if (!opts.sampler()) {
-      return
-    }
+  if (opts?.sampler && !opts.sampler()) {
+    return;
   }
 
   if (opts?.hooks?.onEvent) {
@@ -76,5 +80,5 @@ export function captureEvent(input: ErrorEventInput, opts?: Options) {
     req = opts?.hooks.onRequest(req);
   }
 
-  opts.transport?.(req).catch((reason) => console.log(reason));
+  opts.transport?.(req).catch(reason => console.log(reason));
 }
