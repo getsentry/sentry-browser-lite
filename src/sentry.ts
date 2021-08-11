@@ -13,7 +13,7 @@ interface Envelope {
 }
 
 function stringifyEnvelope({ headers, itemHeaders, body }: Envelope): string {
-  return `${JSON.stringify(headers)}\n${JSON.stringify(itemHeaders)}\n${body}`
+  return `${JSON.stringify(headers)}\n${JSON.stringify(itemHeaders)}\n${JSON.stringify(body)}`
 }
 
 export function captureEvent(e: ErrorEvent, { endpoint }: { endpoint: string }) {
@@ -29,7 +29,9 @@ export function captureEvent(e: ErrorEvent, { endpoint }: { endpoint: string }) 
     body: e,
   }
 
-  void fetch(endpoint, {
+  console.log(stringifyEnvelope(env));
+
+  fetch(endpoint, {
     method: 'POST',
     mode: 'no-cors',
     credentials: 'omit',
