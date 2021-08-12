@@ -9,7 +9,7 @@ import {
 import { SDK_INFO } from './constants';
 import { uuid4 } from './utils';
 import { computeStackTrace } from './tracekit';
-import { addExceptionMechanism, exceptionFromStacktrace } from './parsers';
+import { exceptionFromStacktrace } from './parsers';
 
 const defaultOptions: Partial<Options> = {
   transport: (r: Request) => fetch(r),
