@@ -30,7 +30,7 @@ jobs:
       - name: Install deps
         uses: pnpm/action-setup@v2.0.1
         with:
-          version: 6.0.2
+          version: ^5.0.0 # For compatibility with the Node versions in the matrix, see https://r.pnpm.io/comp
           run_install: true
 
       - name: Build
