@@ -37,7 +37,7 @@ function stringifyEnvelope({
   )}\n${JSON.stringify(body)}`;
 }
 
-export function captureException(e: unknown, opts: Options) {
+export function captureException(e: unknown, opts?: Options) {
   const event: ErrorEventInput = {
     level: Severity.Error,
   };
@@ -73,7 +73,7 @@ export function captureException(e: unknown, opts: Options) {
   );
 }
 
-export function captureMessage(e: unknown, opts: Options) {
+export function captureMessage(e: unknown, opts?: Options) {
   const input: ErrorEventInput = {
     message: String(e),
     level: Severity.Info,
@@ -81,7 +81,7 @@ export function captureMessage(e: unknown, opts: Options) {
   return captureEvent(input, opts);
 }
 
-export function captureEvent(input: ErrorEventInput, opts?: Options) {
+function captureEvent(input: ErrorEventInput, opts?: Options) {
   if (!opts?.endpoint) {
     return;
   }

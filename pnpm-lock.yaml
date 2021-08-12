@@ -2,6 +2,7 @@ lockfileVersion: 5.3
 
 specifiers:
   '@size-limit/preset-small-lib': ^5.0.2
+  agadoo: ^2.0.0
   husky: ^7.0.1
   size-limit: ^5.0.2
   tsdx: ^0.14.1
@@ -10,6 +11,7 @@ specifiers:
 
 devDependencies:
   '@size-limit/preset-small-lib': 5.0.2_15ffaf1a869b13a09fc3c7ba864bd738
+  agadoo: 2.0.0
   husky: 7.0.1
   size-limit: 5.0.2
   tsdx: 0.14.1
@@ -1911,6 +1913,15 @@ packages:
     resolution: {integrity: sha512-asabaBSkEKosYKMITunzX177CXxQ4Q8BSSzMTKD+FefUhipQC70gfW5SiUDhYQ3vk8G+81HqQk7Fv9OXwwn9KA==}
     engines: {node: '>=0.4.0'}
     hasBin: true
+    dev: true
+
+  /agadoo/2.0.0:
+    resolution: {integrity: sha512-68aFhseH51ZBKYKkQNxwDi1hJwTnywBjHWg068qFnMkpXShhOazNzJUPRvaLQjrqhT3EOUth5G9mt1A0/dGhOw==}
+    hasBin: true
+    dependencies:
+      acorn: 7.4.1
+      rollup: 1.32.1
+      rollup-plugin-virtual: 1.0.1
     dev: true
 
   /ajv-errors/1.0.1_ajv@6.12.6:
@@ -7343,6 +7354,11 @@ packages:
       rollup: 1.32.1
       tslib: 2.0.1
       typescript: 3.9.10
+    dev: true
+
+  /rollup-plugin-virtual/1.0.1:
+    resolution: {integrity: sha512-HCTBpV8MwP5lNzZrHD2moVxHIToHU1EkzkKGVj6Z0DcgUfxrxrZmeQirQeLz2yhnkJqRjwiVywK9CS8jDYakrw==}
+    deprecated: This package has been deprecated and is no longer maintained. Please use @rollup/plugin-virtual.
     dev: true
 
   /rollup-pluginutils/2.8.2:
