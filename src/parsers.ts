@@ -1,5 +1,5 @@
-import { TraceKitStackFrame, TraceKitStackTrace } from "./tracekit";
-import { Exception, StackFrame, ErrorEventInput } from "./types";
+import { TraceKitStackFrame, TraceKitStackTrace } from './tracekit';
+import { Exception, StackFrame, ErrorEventInput } from './types';
 
 const STACKTRACE_LIMIT = 50;
 
@@ -51,7 +51,9 @@ export function prepareFramesForEvent(
  * @param stacktrace TraceKitStackTrace that will be converted to an exception
  * @hidden
  */
- export function exceptionFromStacktrace(stacktrace: TraceKitStackTrace): Exception {
+export function exceptionFromStacktrace(
+  stacktrace: TraceKitStackTrace
+): Exception {
   const frames = prepareFramesForEvent(stacktrace.stack);
 
   const exception: Exception = {
@@ -76,17 +78,18 @@ export function prepareFramesForEvent(
  * @param mechanism Mechanism of the mechanism.
  * @hidden
  */
- export function addExceptionMechanism(
+export function addExceptionMechanism(
   event: ErrorEventInput,
   mechanism: {
     [key: string]: any;
-  } = {},
+  } = {}
 ): void {
   // TODO: Use real type with `keyof Mechanism` thingy and maybe make it better?
   try {
     // @ts-ignore Type 'Mechanism | {}' is not assignable to type 'Mechanism | undefined'
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    event.exception!.values![0].mechanism = event.exception!.values![0].mechanism || {};
+    event.exception!.values![0].mechanism =
+      event.exception!.values![0].mechanism || {};
     Object.keys(mechanism).forEach(key => {
       // @ts-ignore Mechanism has no index signature
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

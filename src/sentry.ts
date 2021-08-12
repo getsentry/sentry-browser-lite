@@ -55,7 +55,7 @@ export function captureException(e: unknown, opts?: Options) {
     // we have a real Error object, do nothing
     exception = exceptionFromStacktrace(computeStackTrace(e as Error));
   } else {
-    console.error("Could not parse event");
+    console.error('Could not parse event');
   }
 
   exception.mechanism = {
@@ -129,10 +129,10 @@ function captureEvent(input: ErrorEventInput, opts?: Options) {
 
   opts
     .transport?.(req)
-    .then((_response) => {
+    .then(_response => {
       // TODO: update opts.rateLimiter
     })
-    .catch((reason) => console.log(reason));
+    .catch(reason => console.log(reason));
 }
 
 /**
@@ -142,7 +142,7 @@ function captureEvent(input: ErrorEventInput, opts?: Options) {
  * @param wat A value to be checked.
  * @returns A boolean representing the result.
  */
- export function isError(wat: any): boolean {
+export function isError(wat: any): boolean {
   switch (Object.prototype.toString.call(wat)) {
     case '[object Error]':
       return true;
@@ -163,7 +163,7 @@ function captureEvent(input: ErrorEventInput, opts?: Options) {
  * @param base A constructor to be used in a check.
  * @returns A boolean representing the result.
  */
- export function isInstanceOf(wat: any, base: any): boolean {
+export function isInstanceOf(wat: any, base: any): boolean {
   try {
     return wat instanceof base;
   } catch (_e) {
