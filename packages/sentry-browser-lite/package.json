@@ -23,7 +23,6 @@
     "src"
   ],
   "devDependencies": {
-    "@playwright/test": "^1.13.1",
     "@size-limit/preset-small-lib": "^5.0.2",
     "agadoo": "^2.0.0",
     "husky": "^7.0.1",
