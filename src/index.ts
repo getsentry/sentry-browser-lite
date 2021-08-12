@@ -1,1 +1,1 @@
-export { captureEvent } from './sentry';
+export { captureException } from './sentry';
