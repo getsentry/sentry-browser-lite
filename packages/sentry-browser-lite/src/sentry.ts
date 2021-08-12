@@ -170,3 +170,4 @@ export function isInstanceOf(wat: any, base: any): boolean {
     return false;
   }
 }
+
