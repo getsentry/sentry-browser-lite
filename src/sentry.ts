@@ -87,6 +87,10 @@ function captureEvent(input: ErrorEventInput, opts?: Options) {
   }
   opts = { ...defaultOptions, ...opts };
 
+  if (opts.session) {
+    opts.session.errors++;
+  }
+
   // TODO: check opts.rateLimiter
 
   let event: ErrorEventFinal = {
@@ -126,6 +130,8 @@ function captureEvent(input: ErrorEventInput, opts?: Options) {
   if (opts?.hooks?.onRequest) {
     req = opts?.hooks.onRequest(req);
   }
+
+  // TODO: transport with some sort of queueing mechanism and limited concurrent requests
 
   opts
     .transport?.(req)
