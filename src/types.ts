@@ -1,13 +1,16 @@
 export interface ErrorEventInput {
+  level: Severity;
   message?: string;
+  exception?: {
+    values?: Exception[];
+  };
 }
 
-export interface ErrorEvent {
+export type ErrorEventFinal = {
   event_id: string;
   timestamp: Date;
   sdk: SdkInfo;
-  message?: string;
-}
+} & ErrorEventInput;
 
 export interface SdkInfo {
   name: string;
@@ -25,6 +28,63 @@ export interface Options {
 }
 
 export interface LifecycleHooks {
-  onEvent?: (e: ErrorEvent) => ErrorEvent;
+  onEvent?: (e: ErrorEventFinal) => ErrorEventFinal;
   onRequest?: (r: Request) => Request;
+}
+
+export enum Severity {
+  /** JSDoc */
+  Fatal = 'fatal',
+  /** JSDoc */
+  Error = 'error',
+  /** JSDoc */
+  Warning = 'warning',
+  /** JSDoc */
+  Log = 'log',
+  /** JSDoc */
+  Info = 'info',
+  /** JSDoc */
+  Debug = 'debug',
+  /** JSDoc */
+  Critical = 'critical',
+}
+
+export interface StackFrame {
+  filename?: string;
+  function?: string;
+  module?: string;
+  platform?: string;
+  lineno?: number;
+  colno?: number;
+  abs_path?: string;
+  context_line?: string;
+  pre_context?: string[];
+  post_context?: string[];
+  in_app?: boolean;
+  instruction_addr?: string;
+  addr_mode?: string;
+  vars?: { [key: string]: any };
+}
+
+export interface Stacktrace {
+  frames?: StackFrame[];
+  frames_omitted?: [number, number];
+}
+
+export interface Exception {
+  type?: string;
+  value?: string;
+  mechanism?: Mechanism;
+  module?: string;
+  thread_id?: number;
+  stacktrace?: Stacktrace;
+}
+
+export interface Mechanism {
+  type: string;
+  handled: boolean;
+  data?: {
+    [key: string]: string | boolean;
+  };
+  synthetic?: boolean;
 }
