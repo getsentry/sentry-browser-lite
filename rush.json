@@ -446,6 +446,10 @@
     {
       "packageName": "sentry-browser-lite",
       "projectFolder": "packages/sentry-browser-lite"
+    },
+    {
+      "packageName": "test-app",
+      "projectFolder": "packages/test-app"
     }
     // 
     // {

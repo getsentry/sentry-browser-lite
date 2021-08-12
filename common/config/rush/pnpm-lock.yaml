@@ -1,8 +1,8 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@playwright/test': ^1.13.1
   '@rush-temp/sentry-browser-lite': file:./projects/sentry-browser-lite.tgz
+  '@rush-temp/test-app': file:./projects/test-app.tgz
   '@size-limit/preset-small-lib': ^5.0.2
   agadoo: ^2.0.0
   husky: ^7.0.1
@@ -12,8 +12,8 @@ specifiers:
   typescript: ^4.3.5
 
 dependencies:
-  '@playwright/test': 1.13.1
   '@rush-temp/sentry-browser-lite': file:projects/sentry-browser-lite.tgz
+  '@rush-temp/test-app': file:projects/test-app.tgz
   '@size-limit/preset-small-lib': 5.0.2_15ffaf1a869b13a09fc3c7ba864bd738
   agadoo: 2.0.0
   husky: 7.0.1
@@ -9127,7 +9127,7 @@ packages:
     dev: false
 
   file:projects/sentry-browser-lite.tgz:
-    resolution: {integrity: sha512-VFLb+58zPLoJbmdo97KxDK8XQCwFQzlQVHG7bJ+cDlOc5hBkjxBU9v8n9yt0e5JcoskiE5MoWf02xUR5CLxNlQ==, tarball: file:projects/sentry-browser-lite.tgz}
+    resolution: {integrity: sha512-Snda1wuMXrMz/4+shbk7oJje1O3d86JvDNn454t9FqX/6859021EZy2C0Z7IAy3fgWTjj9sZHvo5bwQPaEVAzQ==, tarball: file:projects/sentry-browser-lite.tgz}
     name: '@rush-temp/sentry-browser-lite'
     version: 0.0.0
     dependencies:
@@ -9148,4 +9148,10 @@ packages:
       - utf-8-validate
       - webpack-cli
       - webpack-command
+    dev: false
+
+  file:projects/test-app.tgz:
+    resolution: {integrity: sha512-BISPtAaEhi4YArD51dtYOA/gHkndz3xpN8d0oB01yPhvlKWR0xZAGDvLvq9xpePPBHwTEWaTrcJZs8qPzVMcCQ==, tarball: file:projects/test-app.tgz}
+    name: '@rush-temp/test-app'
+    version: 0.0.0
     dev: false
