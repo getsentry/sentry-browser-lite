@@ -25,10 +25,9 @@ export interface SdkInfo {
   version: string;
 }
 
-export interface Session {}
-
 export interface Options {
   endpoint: string;
+  session?: Session;
   hooks?: LifecycleHooks;
   sampler?: () => boolean;
   rateLimiter?: any;
@@ -111,4 +110,18 @@ export interface User {
   ip_address?: string;
   email?: string;
   username?: string;
+}
+
+export interface Session {
+  sid: string;
+  status: SessionStatus;
+  init: boolean;
+  errors: bigint;
+}
+
+export enum SessionStatus {
+  Ok = 'ok',
+  Exited = 'exited',
+  Crashed = 'crashed',
+  Abnormal = 'abnormal',
 }
