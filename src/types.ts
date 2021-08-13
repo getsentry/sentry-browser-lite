@@ -10,6 +10,14 @@ export type ErrorEventFinal = {
   event_id: string;
   timestamp: Date;
   sdk: SdkInfo;
+  platform?: string;
+  release?: string;
+  environment?: string;
+  fingerprint?: string[];
+  contexts?: Contexts;
+  tags?: { [key: string]: Primitive };
+  extra?: Extras;
+  user?: User;
 } & ErrorEventInput;
 
 export interface SdkInfo {
@@ -87,4 +95,20 @@ export interface Mechanism {
     [key: string]: string | boolean;
   };
   synthetic?: boolean;
+}
+
+export type Context = Record<string, unknown>;
+export type Contexts = Record<string, Context>;
+
+export type Primitive = number | string | boolean | bigint | symbol | null | undefined;
+
+export type Extra = unknown;
+export type Extras = Record<string, Extra>;
+
+export interface User {
+  [key: string]: any;
+  id?: string;
+  ip_address?: string;
+  email?: string;
+  username?: string;
 }
